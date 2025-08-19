@@ -15281,4 +15281,4 @@ Pterodactyl:
   - icon_hash="846001371"
   - 'header="Set-Cookie: pterodactyl_session="'
 龙腾码支付:
-  - body="/epaydoc/epaydoc.php"
+  - body="/epaydoc/epaydoc.php" && body="/sdk"
