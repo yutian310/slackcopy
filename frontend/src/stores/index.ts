@@ -127,7 +127,7 @@ var fileRetrieval = reactive({
 })
 
 var update = reactive({
-    pocSource: 'https://gitee.com/the-temperature-is-too-low/slack-poc',
+    pocSource: 'https://gitee.com/sword33210/Slack-poc',
 })
 
 var syntaxRules = reactive<FormRules<structs.SpaceEngineSyntax>>({

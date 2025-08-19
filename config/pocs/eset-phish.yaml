@@ -1,0 +1,35 @@
+id: eset-phish
+
+info:
+  name: eset phishing Detection
+  author: rxerium
+  severity: info
+  description: |
+    A eset phishing website was detected
+  reference:
+    - https://eset.com
+  metadata:
+    max-request: 1
+  tags: phishing,eset,osint
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    host-redirects: true
+    max-redirects: 2
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - 'Malware Protection & Internet Security &#124; ESET'
+
+      - type: status
+        status:
+          - 200
+
+      - type: dsl
+        dsl:
+          - '!contains(host,"eset.com")'
+# digest: 4b0a00483046022100a99cd7545c03c17e9fd0a003a80d215dc3429aa866e50686a91b6bee7b44125602210087ffa2672eea7556c0f1e35a69ebac375adc618070b4595ecdee824dede1c0fd:922c64590222798bb761d5b6d8e72950

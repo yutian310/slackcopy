@@ -1,0 +1,35 @@
+id: opera-phish
+
+info:
+  name: opera phishing Detection
+  author: rxerium
+  severity: info
+  description: |
+    A opera phishing website was detected
+  reference:
+    - https://opera.com
+  metadata:
+    max-request: 1
+  tags: phishing,opera,osint
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    host-redirects: true
+    max-redirects: 2
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - 'Opera Web Browser | Faster, Safer, Smarter | Oper'
+
+      - type: status
+        status:
+          - 200
+
+      - type: dsl
+        dsl:
+          - '!contains(host,"opera.com")'
+# digest: 4a0a00473045022011ea8ff447717429ca6d75fa9d981f917986bf618a616caae4beca82e11f024e022100b055093f249dbda1d250be4076276e3fd9cb577960f117026796d83ae4caf587:922c64590222798bb761d5b6d8e72950

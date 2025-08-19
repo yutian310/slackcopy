@@ -1,0 +1,54 @@
+id: amazon-phish
+
+info:
+  name: Amazon phishing Detection
+  author: rxerium
+  severity: info
+  description: |
+    An amazon phishing website was detected
+  reference:
+    - https://amazon.com
+  metadata:
+    max-request: 1
+  tags: phishing,amazon,osint
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    host-redirects: true
+    max-redirects: 2
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - 'Amazon Sign In'
+          - 'Amazon Sign-In'
+        condition: or
+
+      - type: status
+        status:
+          - 200
+
+      - type: dsl
+        dsl:
+          - '!contains(host,"amazon.com")'
+          - '!contains(host,"amazon.co.uk")'
+          - '!contains(host,"amazon.co.es")'
+          - '!contains(host,"amazon.sg")'
+          - '!contains(host,"amazon.sa")'
+          - '!contains(host,"amazon.ca")'
+          - '!contains(host,"amazon.cn")'
+          - '!contains(host,"amazon.eg")'
+          - '!contains(host,"amazon.fr")'
+          - '!contains(host,"amazon.de")'
+          - '!contains(host,"amazon.in")'
+          - '!contains(host,"amazon.it")'
+          - '!contains(host,"amazon.co.jp")'
+          - '!contains(host,"amazon.pl")'
+          - '!contains(host,"amazon.se")'
+          - '!contains(host,"amazon.ae")'
+          - '!contains(host,"amazon.com.tr")'
+        condition: and
+# digest: 490a0046304402204c7dbe7dfc6c1db52fe6970d5e9d6443474e435a3eb2adb72218e1cec14280ed02203926d9abf942ef3a93f7d665ca99d6beb97d88a8d2d7dc1efa535420a294ecc9:922c64590222798bb761d5b6d8e72950

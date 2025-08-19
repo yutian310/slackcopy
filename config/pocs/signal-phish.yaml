@@ -1,0 +1,35 @@
+id: signal-phish
+
+info:
+  name: signal phishing Detection
+  author: rxerium
+  severity: info
+  description: |
+    A signal phishing website was detected
+  reference:
+    - https://signal.org
+  metadata:
+    max-request: 1
+  tags: phishing,signal,osint
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    host-redirects: true
+    max-redirects: 2
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - 'Say &quot;hello&quot; to a different messaging experience. An unexpected focus on privacy, combined with all of the features you expect.'
+
+      - type: status
+        status:
+          - 200
+
+      - type: dsl
+        dsl:
+          - '!contains(host,"signal.org")'
+# digest: 4a0a0047304502210083ac11375194fcaf6cd97b4a826f36f4d983b6f4a4c89e4f8829397f153fc94e02203f12b163f68c35114be2aacb7e5444afda79f798aa97393d6cb18df45c79b5c4:922c64590222798bb761d5b6d8e72950

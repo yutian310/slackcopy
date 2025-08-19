@@ -1,0 +1,35 @@
+id: skype-phish
+
+info:
+  name: skype phishing Detection
+  author: rxerium
+  severity: info
+  description: |
+    A skype phishing website was detected
+  reference:
+    - https://skype.com
+  metadata:
+    max-request: 1
+  tags: phishing,skype,osint
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    host-redirects: true
+    max-redirects: 2
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - 'Skype | Stay connected with free video calls worldwide'
+
+      - type: status
+        status:
+          - 200
+
+      - type: dsl
+        dsl:
+          - '!contains(host,"skype.com")'
+# digest: 490a004630440220559b3d8481864f3a424c391501db0f74c5e8c6ce221e59545ba66ecc286cef4002202cb2a96ceced508d3d92baabba65a62f7b7e4e6c2a32c72153943b23700c66fa:922c64590222798bb761d5b6d8e72950

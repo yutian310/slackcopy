@@ -1,0 +1,32 @@
+id: ivanti-csa-panel
+
+info:
+  name: Ivanti(R) Cloud Services Appliance - Panel
+  author: rxerium
+  severity: info
+  description: |
+    An Ivanti Cloud Services Appliance panel was detected.
+  reference:
+    - https://help.ivanti.com/ld/help/en_US/LDMS/10.0/Windows/csa-h-help.htm
+  metadata:
+    verified: true
+    max-request: 1
+    shodan-query: title:"Cloud Services Appliance"
+  tags: ivanti,csa,panel,login
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "<title>Ivanti(R) Cloud Services Appliance</title>"
+
+      - type: status
+        status:
+          - 200
+# digest: 4a0a00473045022040a77575f921d8d0c0927b27c34043ab8b0bcb64ebd0f5c619241d0f22d5c289022100da00cadeb981e69ec292872eb864132b6415ff42fdaf18211ef85986fe34d9a4:922c64590222798bb761d5b6d8e72950
